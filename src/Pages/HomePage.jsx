@@ -23,6 +23,11 @@ import { Link } from 'react-router-dom';
 import S7Roadmapmain from '../Components/S7Roadmap';
 import Tokenomics from './Tokenomics';
 import FAQSection from '../Components/FAQSection';
+import KeyFeatures from '../Components/KeyFeatures';
+import WhyGTC from '../Components/WhyGTC';
+import VisionMission from '../Components/VisionMission';
+import WhyInvestGTC from '../Components/WhyInvestGTC';
+import ProblemSolution from '../Components/ProblemSolution';
 import Marquee from 'react-fast-marquee';
 
 import pancakeswap from "../assets/feature-icons/pancackcap.png";
@@ -56,15 +61,17 @@ const HomePage = () => {
         <div className="overflow-x-hidden w-full">
             {/* Hero  */}
             <div className="relative h-[90vh] w-full bg-black overflow-hidden">
-                <video autoPlay muted loop className="w-full absolute left-0 top-0 h-full object-cover flex z-[1] opacity-[0.6]" >
+                <video autoPlay muted loop className="w-full absolute left-0 top-0 h-full object-cover flex z-[1] opacity-[0.3]" onLoadedMetadata={(e) => {
+                    e.target.playbackRate = 0.5;
+                }}>
                     <source src={heroVideo} type="video/mp4" />
                 </video>
                 <div className='absolute bottom-0 w-full h-16 translate-y-1/2 bg-black z-10 blur-lg'></div>
                 <div className="relative flex flex-col h-[90%] sm:h-[99%] w-full justify-center items-center">
                     <div className="relative max-w-7xl mx-auto text-center flex items-center gap-6 sm:gap-10 flex-col px-4 sm:px-5 phone:px-3 z-[3] rounded-2xl p-4 sm:p-6">
                         <div className='absolute inset-0 h-full w-full bg-black blur-2xl -z-10'></div>
-                        <h1 className="max-w-5xl text-gradient leading-tight text-5xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl uppercase px-2">Real currency in digital world</h1>
-                        <p className="max-w-4xl Gsemibold text-xs sm:text-lg md:text-xl lg:text-2xl tablet:text-xl px-2" >Stable. Secure. Universal. GTC powers global trade, travel, and payments without borders—bringing the world closer, one transaction at a time
+                        <h1 className="type heading-animate max-w-5xl text-gradient leading-tight text-5xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl uppercase px-2">Real currency in digital world</h1>
+                        <p className="max-w-4xl Gsemibold text-xs sm:text-lg md:text-xl lg:text-2xl tablet:text-xl px-2" >GTC powers global trade, travel, and payments without borders—bringing the world closer.
                         </p>
                         <div className="flex gap-3 sm:gap-4 flex-wrap justify-center Gsemibold text-base sm:text-lg md:text-xl">
                             <a target='blank' href='https://global-trading-currency.gitbook.io/global-trading-currency-docs' className='btn1 btn-hover-scale px-4 sm:px-7 py-2 phone:px-5 phone:py-2 border-[#F7A00B]'>
@@ -133,6 +140,18 @@ const HomePage = () => {
                 {/* </div> */}
             </div>
 
+            {/* Vision and Mission */}
+            <VisionMission />
+
+            {/* Why Invest in GTC */}
+            <WhyInvestGTC />
+
+            {/* Problem and Solution */}
+            <ProblemSolution />
+
+            {/* Key Features */}
+            <KeyFeatures />
+
             {/* usecases  */}
             <div id="usecase" className="px-5 py-10 h-[40rem] tablet:h-[48rem] bg-[#1E1E1E]">
                 <div className="w-full flex flex-col justify-center mb-16">
@@ -146,7 +165,7 @@ const HomePage = () => {
                         direction="vertical"
                         centeredSlides={true}
                         onTouchStart={handleTouchStart}
-                        modules={[Mousewheel]} 
+                        modules={[Mousewheel]}
                         mousewheel={{
                             sensitivity: 1,
                             releaseOnEdges: true,
@@ -433,12 +452,14 @@ const HomePage = () => {
                 </div>
             </div>
 
-
             {/* Roadmap */}
             <S7Roadmapmain />
 
+            {/* Why GTC */}
+            <WhyGTC />
+
             {/* tokenomics */}
-            <Tokenomics />
+            {/* <Tokenomics /> */}
 
             {/* contrac address  */}
             <Wave colorTop="#1E1E1E" colorBottom="#171717" />

@@ -2,6 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
+}
+
 :root {
   --curve-size: 0.7em;
   --curve-size2: 5em;
@@ -344,4 +357,34 @@ background: linear-gradient(180deg, #1E1E1E 0%, rgba(132, 132, 132, 0.50) 100%);
   transform: translateY(-3px) scale(1.1);
   box-shadow: 0 6px 20px rgba(251, 182, 10, 0.4);
   transition: all 0.3s ease;
+}
+
+.heading-animate {
+  color: #dbd56e;
+  background: -webkit-linear-gradient(90deg, #FFA200, #FFD996, #FFA200);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 3rem;
+  font-weight: 500;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid;
+  animation: type 4s steps(90) 1.5s 1 normal both, cursor 1s step-end infinite;
+  position: relative;
+}
+
+@keyframes type {
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes cursor {
+  50% {
+    border-color: transparent;
+  }
 }

@@ -1,5 +1,5 @@
 
-import logo1 from "../assets/logo/gtc-logo.png"
+import logo1 from "../assets/logo/gtc-logo.avif"
 
 import facebook from "../assets/socialmedia/Facebook.png"
 import twiter from "../assets/socialmedia/Twitter.png"
@@ -20,11 +20,11 @@ const Footer = () => {
                 <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8 z-10">
                     <div className="md:flex md:justify-between tablet:justify-center z-10">
                         <div className="flex  flex-col gap-5 mb-6 max-w-[40%] tablet:max-w-[100%] tablet:items-center  md:mb-0">
-                            {/* <a href="" className="flex items-center">
+                            <a href="" className="flex items-center">
                                 <img src={logo1} className="h-[50px] me-3" alt="FlowBite Logo" />
-                                <span className="self-center text-gradient text-4xl font-bold whitespace-nowrap  text-white">Logo  </span>
-                            </a> */}
-                            <h2 className="text-xl Gsemibold">About Global Token Coin</h2>
+                                {/* <span className="self-center text-gradient text-4xl font-bold whitespace-nowrap  text-white">Logo  </span> */}
+                            </a>
+                            {/* <h2 className="text-xl Gsemibold">About Global Token Coin</h2> */}
                             <p className=" tablet:text-center text-white " >Global Trade Coin (GTC) combines the stability of a $1-pegged digital currency with the innovation of blockchain technology. With practical use cases and a bold vision, we’re redefining the way the world trades, pays, and transacts globally.</p>
                         </div>
                         <div className="Gregular mt- flex gap-[5vmax] tablet:justify-evenly tablet:flex-wrap z-10">
