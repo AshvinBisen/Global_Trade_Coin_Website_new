@@ -8,7 +8,7 @@ const UseScrollToElement = () => {
         const scrollToElement = () => {
             const { search } = location1;
             const params = new URLSearchParams(search);
-            const scrollToId = params.get('');
+            const scrollToId = params.get('scrollTo');
 
             if (scrollToId) {
                 const element = document.getElementById(scrollToId);

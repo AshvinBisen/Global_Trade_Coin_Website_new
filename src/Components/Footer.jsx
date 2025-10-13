@@ -32,16 +32,16 @@ const Footer = () => {
                                 <h2 className="mb-6 text-xl Gsemibold text-white">Quick Links</h2>
                                 <ul className="text-[#DADADA] Gsemibold text-base">
                                     <li className="mb-4 tablet:text-center  ">
-                                        <Link to="/?=Hero" className=" capitalize unline  hover:underline " >home</Link>
+                                        <Link to="/?scrollTo=hero" className=" capitalize unline  hover:underline " >home</Link>
                                     </li>
-                                    <li className=" mb-4 tablet:text-center  " >
+                                    {/* <li className=" mb-4 tablet:text-center  " >
                                         <Link to="/Roadmap?=FAQ" className="hover:underline capitalize">FAQ's</Link>
-                                    </li>
-                                    <li className=" mb-4 tablet:text-center  " >
+                                    </li> */}
+                                    {/* <li className=" mb-4 tablet:text-center  " >
                                         <Link to="/Tokenomics" className="hover:underline capitalize">Tokenomics</Link>
-                                    </li>
+                                    </li> */}
                                     <li className=" mb-4 tablet:text-center  " >
-                                        <Link to="/Roadmap" className="hover:underline capitalize">Roadmap</Link>
+                                        <Link to="/?scrollTo=roadmap" className="hover:underline capitalize">Roadmap</Link>
                                     </li>
                                 </ul>
                             </div>

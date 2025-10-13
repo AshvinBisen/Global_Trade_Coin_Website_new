@@ -148,15 +148,6 @@ body {
   inset: 0;
 }
 
-/* .btn1::before {
-  background: var(--border-color);
-  background-size: 300% 300%;
-  animation: move-bg7234 5s ease infinite;
-  z-index: -2;
-} */
-
-/* from-[#FFA100] via-[#FFE488] to-[#F89D00] */
-
 .btn1::after {
   /* background: white; */
   background-image: linear-gradient(to right, #FFA100, #FFE488 50%, #F89D00);
@@ -174,23 +165,6 @@ body {
       var(--border-width) calc(100% - var(--border-width)));
   transition: clip-path 500ms;
 }
-
-/* 
-.btn1:where(:hover, :focus)::after {
-  clip-path: polygon(
-    calc(100% - var(--border-width))
-      calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5)),
-    calc(100% - var(--border-width)) var(--border-width),
-    calc(100% - var(--border-width)) var(--border-width),
-    calc(100% - var(--border-width))
-      calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5)),
-      calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5))
-      calc(100% - var(--border-width)),
-      calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5))
-      calc(100% - var(--border-width))
-  );
-  transition: 200ms;
-} */
 
 .btn1:where(:hover, :focus) {
   color: #fff;
@@ -247,11 +221,6 @@ body {
     transform: translate(-50%, -50%) rotate(-360deg);
   }
 }
-
-
-
-/* border-radius: 12px 0px 0px 12px;
-background: linear-gradient(180deg, #1E1E1E 0%, rgba(132, 132, 132, 0.50) 100%); */
 
 
 
@@ -369,16 +338,16 @@ background: linear-gradient(180deg, #1E1E1E 0%, rgba(132, 132, 132, 0.50) 100%);
   overflow: hidden;
   white-space: nowrap;
   border-right: 2px solid;
-  animation: type 4s steps(90) 1.5s 1 normal both, cursor 1s step-end infinite;
+  animation: typeRepeating 15s infinite, cursor 1s linear infinite;
   position: relative;
 }
 
-@keyframes type {
-  from {
+@keyframes typeRepeating {
+    0% {
     width: 0;
   }
-
-  to {
+  
+  100% {
     width: 100%;
   }
 }

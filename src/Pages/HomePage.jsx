@@ -3,8 +3,7 @@ import { Mousewheel } from 'swiper/modules';
 import 'swiper/css';
 
 import heroVideo from "../assets/images/herobgvideoM.mp4"
-import abtVid from "../assets/images/aboutVid.mp4"
-import aboutImg from "../assets/images/aboutUs2.gif"
+import aboutImg from "../assets/images/aboutUs.gif"
 import Wave from "../Components/Wave"
 
 import uc1 from "../assets/images/uc1.png"
@@ -15,13 +14,12 @@ import uc5 from "../assets/images/uc5.png"
 import uc6 from "../assets/images/uc6.png"
 import uc7 from "../assets/images/uc7.png"
 import uc8 from "../assets/images/uc8.png"
-import uc9 from "../assets/images/uc9.png"
-import uc10 from "../assets/images/uc10.png"
+
 import UseScrollToElement from '../Components/UseScrollToElement';
 import Contract from '../Components/Contract';
 import { Link } from 'react-router-dom';
 import S7Roadmapmain from '../Components/S7Roadmap';
-import Tokenomics from './Tokenomics';
+
 import FAQSection from '../Components/FAQSection';
 import KeyFeatures from '../Components/KeyFeatures';
 import WhyGTC from '../Components/WhyGTC';
@@ -60,7 +58,7 @@ const HomePage = () => {
     return (
         <div className="overflow-x-hidden w-full">
             {/* Hero  */}
-            <div className="relative h-[90vh] w-full bg-black overflow-hidden">
+            <div id='hero' className="relative h-[90vh] w-full bg-black overflow-hidden">
                 <video autoPlay muted loop className="w-full absolute left-0 top-0 h-full object-cover flex z-[1] opacity-[0.3]" onLoadedMetadata={(e) => {
                     e.target.playbackRate = 0.5;
                 }}>
@@ -68,9 +66,10 @@ const HomePage = () => {
                 </video>
                 <div className='absolute bottom-0 w-full h-16 translate-y-1/2 bg-black z-10 blur-lg'></div>
                 <div className="relative flex flex-col h-[90%] sm:h-[99%] w-full justify-center items-center">
-                    <div className="relative max-w-7xl mx-auto text-center flex items-center gap-6 sm:gap-10 flex-col px-4 sm:px-5 phone:px-3 z-[3] rounded-2xl p-4 sm:p-6">
+                    <div className="relative max-w-7xl w-xs sm:w-full mx-auto text-center flex items-center gap-6 sm:gap-10 flex-col px-4 sm:px-5 phone:px-3 z-[3] rounded-2xl p-4 sm:p-6">
                         <div className='absolute inset-0 h-full w-full bg-black blur-2xl -z-10'></div>
-                        <h1 className="type heading-animate max-w-5xl text-gradient leading-tight text-5xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl uppercase px-2">Real currency in digital world</h1>
+                        <h1 className="hidden sm:block type heading-animate max-w-5xl text-gradient leading-tight text-5xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl uppercase px-2">Real currency in digital world</h1>
+                        <h1 className="sm:hidden max-w-5xl text-gradient leading-tight text-5xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl uppercase px-2">Real currency in digital world</h1>
                         <p className="max-w-4xl Gsemibold text-xs sm:text-lg md:text-xl lg:text-2xl tablet:text-xl px-2" >GTC powers global trade, travel, and payments without borders—bringing the world closer.
                         </p>
                         <div className="flex gap-3 sm:gap-4 flex-wrap justify-center Gsemibold text-base sm:text-lg md:text-xl">
@@ -106,6 +105,9 @@ const HomePage = () => {
                 </div>
             </div>
 
+            {/* Key Features */}
+            <KeyFeatures />
+
             {/* about   */}
             <div id='about-us' className="flex min-h-fit flex-col justify-center items-center phone:pb-16 overflow-hidden">
                 <div className="w-full flex flex-col justify-center mt-16">
@@ -118,9 +120,6 @@ const HomePage = () => {
 
                     <div id="filler-main" className='flex z-10  w-full gap-10 tablet:gap-0 tablet:flex-col tablet:items-center '>
                         <div id="filler-left" className='relative z-10 w-[45%]  flex tablet:w-[100%] tablet:phone:w-[100%]  justify-center items-center '>
-                            {/* <video autoPlay muted loop className="w-screen   left-0 top-0 h-full tablet:h-[80vh] object-cover flex   z-[-1]    " >
-                                    <source src={abtVid} type="video/mp4" />
-                                </video> */}
                             <img src={aboutImg} alt="about image" />
                         </div>
                         <div className='hidden md:block h-72 w-[2px] bg-gradient-to-b from-black via-[#FFCB71] to-black bg-black mt-64'></div>
@@ -149,8 +148,7 @@ const HomePage = () => {
             {/* Problem and Solution */}
             <ProblemSolution />
 
-            {/* Key Features */}
-            <KeyFeatures />
+
 
             {/* usecases  */}
             <div id="usecase" className="px-5 py-10 h-[40rem] tablet:h-[48rem] bg-[#1E1E1E]">
@@ -457,9 +455,6 @@ const HomePage = () => {
 
             {/* Why GTC */}
             <WhyGTC />
-
-            {/* tokenomics */}
-            {/* <Tokenomics /> */}
 
             {/* contrac address  */}
             <Wave colorTop="#1E1E1E" colorBottom="#171717" />
