@@ -1,0 +1,12 @@
+import React from "react";
+
+const Stats = () => {
+  return (
+    <div>
+      <h2>Stats Page</h2>
+      <p>Your stats and analytics will appear here.</p>
+    </div>
+  );
+};
+
+export default Stats;
