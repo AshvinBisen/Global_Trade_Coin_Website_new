@@ -89,11 +89,7 @@ function App() {
         <BrowserRouter>
           <ScrollToTop />
           <Routes>
-            <Route path="/l" element={<MainLayout>  <Loader />  </MainLayout>} />
             <Route path="/" element={<MainLayout> <HomePage />  </MainLayout>} />
-            <Route path="/tokenomics" element={<MainLayout> <HomePage />  </MainLayout>} />
-            <Route path="/presale" element={<MainLayout> <HomePage />  </MainLayout>} />
-            <Route path="/roadmap" element={<MainLayout> <HomePage />  </MainLayout>} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </BrowserRouter>
