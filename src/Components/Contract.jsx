@@ -5,6 +5,11 @@ const Contract = () => {
     const [copied, setCopied] = useState(false);
     const text = "0xdcb4309129e4c8b38760bc7b16ee873dabd01a5c";
 
+    // Function to truncate address for mobile
+    const getTruncatedAddress = () => {
+        return `${text.slice(0, 13)}.......${text.slice(-15)}`;
+    };
+
     const handleCopy = async () => {
         try {
             // Modern clipboard API
@@ -39,7 +44,7 @@ const Contract = () => {
             alert('Failed to copy to clipboard. Please copy manually.');
         }
     };
-    
+
     return (
         <>
             <div id="contract1" className=" bg-[#171717] w-full  Gregular z-10 px-4 py-10 ">
@@ -50,7 +55,10 @@ const Contract = () => {
                 <div className=" relative max-w-5xl bg-[#2E2921] border border-[#FF9D0036] flex flex-col justify-center items-center py-10 rounded-2xl gap-5 px-5 phone:px-2 mx-auto" style={{
                     boxShadow: "0 0 30px 8px rgba(255, 170, 0, 0.1)"
                 }}>
-                    <h3 className="Gregular text-md sm:text-[26px] z-10 text-[#FFA100]" style={{ textShadow: "0px 4px 3px rgba(0,0,0,1)" }}>{text}</h3>
+                    <h3 className="Gregular text-md sm:text-[26px] z-10 text-[#FFA100]" style={{ textShadow: "0px 4px 3px rgba(0,0,0,1)" }}>
+                        <span className="hidden sm:inline">{text}</span>
+                        <span className="sm:hidden">{getTruncatedAddress()}</span>
+                    </h3>
                     <div id="contract-button" className="flex z-10 flex-wrap justify-center gap-0">
                         <button
                             className="btn1 py-3 px-5"
