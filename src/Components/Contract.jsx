@@ -3,7 +3,7 @@ import copy from "../assets/logo/copy.png"
 
 const Contract = () => {
     const [copied, setCopied] = useState(false);
-    const text = "C3487cn34kds834894302j8432jf98345j5f734n";
+    const text = "0xdcb4309129e4c8b38760bc7b16ee873dabd01a5c";
 
     const handleCopy = async () => {
         try {

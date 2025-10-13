@@ -88,7 +88,7 @@ const S7Roadmap = ({ roadmapdata }) => {
 
     return (
         <>
-            <section id="Roadmap" className="mt-24 mb-12" >
+            <section id="roadmap" className="mt-24 mb-12" >
                 <div className="w-full mx-auto flex justify-center mt-12">
                     <p className="bg-gradient-to-r w-fit from-[#FFCB71] to-[#FFA200] bg-clip-text text-transparent font-bold text-3xl text-center">Roadmap</p>
                 </div>

@@ -3,8 +3,8 @@ import { lazy, useEffect } from 'react'
 import { Suspense } from 'react'
 import PropTypes from 'prop-types';
 
-import './App.css'
-import "../src/Styles/Loader.css"
+// import './App.css'
+// import "../src/Styles/Loader.css"
 import Loader from './Components/Loader';
 import Navbar from './Components/Navbar'
 import Footer from './Components/Footer'
@@ -12,7 +12,7 @@ import { BrowserRouter, Routes, Route, useLocation, Navigate } from 'react-route
 import Headroom from 'react-headroom'
 
 const HomePage = lazy(() => import('./Pages/HomePage'))
-const Tokenomics = lazy(() => import('./Pages/Tokenomics'))
+// const Tokenomics = lazy(() => import('./Pages/Tokenomics'))
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -91,7 +91,9 @@ function App() {
           <Routes>
             <Route path="/l" element={<MainLayout>  <Loader />  </MainLayout>} />
             <Route path="/" element={<MainLayout> <HomePage />  </MainLayout>} />
-            <Route path="/Tokenomics" element={<MainLayout> <Tokenomics />  </MainLayout>} />
+            <Route path="/tokenomics" element={<MainLayout> <HomePage />  </MainLayout>} />
+            <Route path="/presale" element={<MainLayout> <HomePage />  </MainLayout>} />
+            <Route path="/roadmap" element={<MainLayout> <HomePage />  </MainLayout>} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </BrowserRouter>

@@ -3,8 +3,7 @@ import { Mousewheel } from 'swiper/modules';
 import 'swiper/css';
 
 import heroVideo from "../assets/images/herobgvideoM.mp4"
-import abtVid from "../assets/images/aboutVid.mp4"
-import aboutImg from "../assets/images/aboutUs2.gif"
+import aboutImg from "../assets/images/aboutUs.gif"
 import Wave from "../Components/Wave"
 
 import uc1 from "../assets/images/uc1.png"
@@ -15,13 +14,12 @@ import uc5 from "../assets/images/uc5.png"
 import uc6 from "../assets/images/uc6.png"
 import uc7 from "../assets/images/uc7.png"
 import uc8 from "../assets/images/uc8.png"
-import uc9 from "../assets/images/uc9.png"
-import uc10 from "../assets/images/uc10.png"
+
 import UseScrollToElement from '../Components/UseScrollToElement';
 import Contract from '../Components/Contract';
 import { Link } from 'react-router-dom';
 import S7Roadmapmain from '../Components/S7Roadmap';
-import Tokenomics from './Tokenomics';
+
 import FAQSection from '../Components/FAQSection';
 import KeyFeatures from '../Components/KeyFeatures';
 import WhyGTC from '../Components/WhyGTC';
@@ -106,6 +104,9 @@ const HomePage = () => {
                 </div>
             </div>
 
+            {/* Key Features */}
+            <KeyFeatures />
+
             {/* about   */}
             <div id='about-us' className="flex min-h-fit flex-col justify-center items-center phone:pb-16 overflow-hidden">
                 <div className="w-full flex flex-col justify-center mt-16">
@@ -118,9 +119,6 @@ const HomePage = () => {
 
                     <div id="filler-main" className='flex z-10  w-full gap-10 tablet:gap-0 tablet:flex-col tablet:items-center '>
                         <div id="filler-left" className='relative z-10 w-[45%]  flex tablet:w-[100%] tablet:phone:w-[100%]  justify-center items-center '>
-                            {/* <video autoPlay muted loop className="w-screen   left-0 top-0 h-full tablet:h-[80vh] object-cover flex   z-[-1]    " >
-                                    <source src={abtVid} type="video/mp4" />
-                                </video> */}
                             <img src={aboutImg} alt="about image" />
                         </div>
                         <div className='hidden md:block h-72 w-[2px] bg-gradient-to-b from-black via-[#FFCB71] to-black bg-black mt-64'></div>
@@ -149,8 +147,7 @@ const HomePage = () => {
             {/* Problem and Solution */}
             <ProblemSolution />
 
-            {/* Key Features */}
-            <KeyFeatures />
+
 
             {/* usecases  */}
             <div id="usecase" className="px-5 py-10 h-[40rem] tablet:h-[48rem] bg-[#1E1E1E]">
