@@ -1,0 +1,92 @@
+body {
+  overflow-x: hidden;
+}
+
+
+
+
+.gradient-border {
+  position: relative;
+  border-radius: 8px;
+  padding: 1px; 
+  background: linear-gradient(180deg, #FFA100 0%, #FFE488 44%, #F89D00 100%);
+}
+
+.gradient-border > .inner {
+  background: #000; 
+  border-radius: 7px; 
+  padding: 16px;
+  height: 100%;
+}
+
+
+
+
+
+.gradient-text {
+  background: linear-gradient(180deg, #FFA100 0%, #FFE488 44%, #F89D00 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text; 
+  color: transparent;
+}
+
+.gradient-bg {
+ background: linear-gradient(180deg, #FFA100 0%, #FFE488 44%, #F89D00 100%);
+}
+
+.gradient-bg-hover {
+ background: linear-gradient(180deg, #FFA100 20%, #FFE488 55%, #F89D00 80%);
+}
+
+
+
+
+
+.custom-checkbox {
+  appearance: none; 
+  width: 20px;
+  height: 20px;
+  background-color: black;
+  border: 2px solid #FFA100; 
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+}
+
+/* When checked */
+.custom-checkbox:checked {
+  background-color: black;
+  border-color: #FFA100;
+}
+
+
+.custom-checkbox:checked::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 2px;
+  width: 6px;
+  height: 11px;
+  border: solid #FFA100;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+
+
+
+
+
+
+/* For smooth horizontal scroll on smaller devices */
+.custom-scrollbar::-webkit-scrollbar {
+  height: 8px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #FFA100 0%, #FFE488 44%, #F89D00 100%);
+  border-radius: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(255, 193, 7, 0.1);
+}

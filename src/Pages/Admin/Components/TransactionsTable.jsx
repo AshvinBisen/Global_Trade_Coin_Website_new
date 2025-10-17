@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { CalendarDays, Search, FileDown } from "lucide-react";
+import { FileDown } from "lucide-react";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
+import searchicon from "../../../assets/dashboard/search.png"; // ✅ make sure path is correct
 
-// Column Configuration
+// ✅ Column Configuration
 const columns = [
   { header: "S.No", accessor: "sno" },
   { header: "Date", accessor: "date" },
@@ -12,7 +13,7 @@ const columns = [
   { header: "On Price", accessor: "onPrice" },
 ];
 
-// Mock Data
+// ✅ Mock Data
 const totalRows = 3440;
 const pageSize = 10;
 const data = Array.from({ length: totalRows }).map((_, index) => ({
@@ -24,7 +25,7 @@ const data = Array.from({ length: totalRows }).map((_, index) => ({
   userName: `User${(index % 50) + 1}`,
 }));
 
-// Small ETH Button
+// ✅ Small ETH Button
 function EthButton() {
   return (
     <button className="bg-gradient-to-r from-yellow-300 to-yellow-600 text-black font-bold rounded-full px-4 py-1 text-xs sm:text-sm shadow-md hover:scale-105 transition">
@@ -33,7 +34,7 @@ function EthButton() {
   );
 }
 
-// Pagination
+// ✅ Pagination Footer
 function PaginationFooter({ currentPage, pageCount, onChange }) {
   return (
     <div className="flex flex-col sm:flex-row justify-between items-center px-2 py-3 mt-4 space-y-3 sm:space-y-0">
@@ -72,9 +73,6 @@ function PaginationFooter({ currentPage, pageCount, onChange }) {
 export default function TransactionsTable() {
   const [currentPage, setCurrentPage] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
-  const [showFilter, setShowFilter] = useState(false);
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
 
   // ✅ Filter + Search Logic
   const filteredData = data.filter((row) => {
@@ -82,14 +80,7 @@ export default function TransactionsTable() {
     const matchesSearch = Object.values(row).some((value) =>
       String(value).toLowerCase().includes(search)
     );
-
-    const rowDate = new Date(row.date);
-    const start = startDate ? new Date(startDate) : null;
-    const end = endDate ? new Date(endDate) : null;
-    const matchesDate =
-      (!start || rowDate >= start) && (!end || rowDate <= end);
-
-    return matchesSearch && matchesDate;
+    return matchesSearch;
   });
 
   const pageCount = Math.ceil(filteredData.length / pageSize);
@@ -124,118 +115,50 @@ export default function TransactionsTable() {
   };
 
   return (
-    <div className="bg-[#000] border border-[#FFA100] rounded-lg p-4 sm:p-6 w-full  m-4 shadow-lg">
+    <div className="bg-[#000] border border-[#FFA100] rounded-lg p-4 sm:p-6 w-full mx-auto m-4 shadow-lg">
       {/* ✅ Heading */}
-      <h2 className="text-white text-lg sm:text-xl font-bold mb-5 tracking-wide">
+      {/* <h2 className="text-[#FFA100] text-lg sm:text-xl font-bold mb-5 tracking-wide">
         Transactions
-      </h2>
+      </h2> */}
 
       {/* ✅ Filters Row */}
-      <div className="flex flex-wrap justify-between items-center gap-3 mb-5">
-        {/* Filter By + Date Filter */}
-        <div className="flex flex-wrap items-center gap-3">
-          <span className="text-[#FFA100] font-semibold text-sm sm:text-base">
-            Filter By
-          </span>
+     {/* Header + Controls */}
+<div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-5 gap-3">
+  {/* Heading - Left */}
+  <h2 className="text-[#FFA100] text-lg sm:text-xl font-bold tracking-wide">
+    Transactions
+  </h2>
 
-          {/* Date Range Dropdown */}
-          <div className="relative">
-            <button
-              onClick={() => setShowFilter(!showFilter)}
-              className="flex items-center space-x-2 border border-[#FFA100] text-[#FFA100] px-3 py-2 rounded-md text-sm hover:bg-[#1a1a1a] transition"
-            >
-              <span>Select date range</span>
-              <svg
-                className={`w-4 h-4 transform transition ${
-                  showFilter ? "rotate-180" : ""
-                }`}
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M19 9l-7 7-7-7"
-                />
-              </svg>
-            </button>
+  {/* Search + Export - Right */}
+  <div className="flex flex-wrap sm:flex-nowrap items-center gap-3 w-full sm:w-auto">
+    {/* Search Box */}
+    <div className="relative w-full sm:w-64 flex items-center">
+      <button className="absolute left-[3px] top-[3px] bottom-[3px] w-8 flex items-center justify-center">
+        <img src={searchicon} alt="search" className="w-6 h-6" />
+      </button>
+      <input
+        type="text"
+        placeholder="Search By User Name"
+        value={searchTerm}
+        onChange={(e) => {
+          setSearchTerm(e.target.value);
+          setCurrentPage(0); // Reset page on search
+        }}
+        className="w-full bg-transparent text-black placeholder-[#000000] gradient-bg rounded-md py-2 pl-12 pr-4 text-sm focus:outline-none"
+      />
+    </div>
 
-            {/* Dropdown */}
-            {showFilter && (
-              <div className="absolute left-0 mt-2 w-64 bg-black border border-[#FFA100] rounded-md p-3 shadow-lg z-20 space-y-3">
-                {/* Start Date */}
-                <div className="flex items-center justify-between space-x-2 text-[#FFA100] text-sm">
-                  <div className="flex-1">
-                    <label className="mb-1 block">Start Date</label>
-                    <input
-                      type="date"
-                      id="startDatePicker"
-                      value={startDate}
-                      onChange={(e) => setStartDate(e.target.value)}
-                      className="bg-[#111] text-white w-full px-2 py-1 rounded border border-[#FFA100] focus:outline-none"
-                    />
-                  </div>
-                  <CalendarDays
-                    className="w-5 h-5 text-[#FFA100] cursor-pointer mt-6"
-                    onClick={() =>
-                      document.querySelector("#startDatePicker")?.showPicker()
-                    }
-                  />
-                </div>
+    {/* Export Excel Button */}
+    <button
+      onClick={exportToExcel}
+      className="flex items-center justify-center space-x-2 border border-[#FFA100] bg-[#FFA100] text-black px-3 py-2 rounded-md text-sm font-semibold hover:bg-[#ffb733] transition w-full sm:w-auto"
+    >
+      <FileDown className="w-4 h-4" />
+      <span>Export Excel</span>
+    </button>
+  </div>
+</div>
 
-                {/* End Date */}
-                <div className="flex items-center justify-between space-x-2 text-[#FFA100] text-sm">
-                  <div className="flex-1">
-                    <label className="mb-1 block">End Date</label>
-                    <input
-                      type="date"
-                      id="endDatePicker"
-                      value={endDate}
-                      onChange={(e) => setEndDate(e.target.value)}
-                      className="bg-[#111] text-white w-full px-2 py-1 rounded border border-[#FFA100] focus:outline-none"
-                    />
-                  </div>
-                  <CalendarDays
-                    className="w-5 h-5 text-[#FFA100] cursor-pointer mt-6"
-                    onClick={() =>
-                      document.querySelector("#endDatePicker")?.showPicker()
-                    }
-                  />
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Search + Export Buttons */}
-        <div className="flex flex-wrap items-center gap-3">
-          {/* Search */}
-          <div className="relative w-full sm:w-60">
-            <Search className="absolute left-3 top-2.5 w-4 h-4 text-[#FFA100]" />
-            <input
-              type="text"
-              placeholder="Search anything..."
-              value={searchTerm}
-              onChange={(e) => {
-                setSearchTerm(e.target.value);
-                setCurrentPage(0);
-              }}
-              className="border border-[#FFA100] bg-transparent text-white pl-9 pr-3 py-2 rounded-md focus:outline-none placeholder-[#B1A8A8] text-sm w-full"
-            />
-          </div>
-
-          {/* Export Excel */}
-          <button
-            onClick={exportToExcel}
-            className="flex items-center justify-center space-x-2 border border-[#FFA100] bg-[#FFA100] text-black px-3 py-2 rounded-md text-sm font-semibold hover:bg-[#ffb733] transition w-full sm:w-auto"
-          >
-            <FileDown className="w-4 h-4" />
-            <span>Export Excel</span>
-          </button>
-        </div>
-      </div>
 
       {/* ✅ Table Section */}
       <div className="overflow-x-auto">
@@ -292,7 +215,5 @@ export default function TransactionsTable() {
     </div>
   );
 }
-
-
 
 

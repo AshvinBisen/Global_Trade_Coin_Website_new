@@ -1,19 +1,28 @@
-import React from 'react';
-import { lazy, useEffect } from 'react'
-import { Suspense } from 'react'
-import PropTypes from 'prop-types';
+import React, { lazy, Suspense, useEffect } from "react";
+import PropTypes from "prop-types";
+import { BrowserRouter, Routes, Route, useLocation, Navigate } from "react-router-dom";
+import Headroom from "react-headroom";
 
-// import './App.css'
-// import "../src/Styles/Loader.css"
-import Loader from './Components/Loader';
-import Navbar from './Components/Navbar'
-import Footer from './Components/Footer'
-import { BrowserRouter, Routes, Route, useLocation, Navigate } from 'react-router-dom';
-import Headroom from 'react-headroom'
+// Components
+import Loader from "./Components/Loader";
+import Navbar from "./Components/Navbar";
+import Footer from "./Components/Footer";
 
-const HomePage = lazy(() => import('./Pages/HomePage'))
-// const Tokenomics = lazy(() => import('./Pages/Tokenomics'))
+// Layouts
+import AdminLayout from "./Pages/Admin/AdminLayout";
+import UserLayout from "./Pages/User/UserLayout";
 
+// Lazy Pages
+const HomePage = lazy(() => import("./Pages/HomePage"));
+const AdminDashboard = lazy(() => import("./Pages/Admin/Dashboard"));
+const AdminHistory = lazy(() => import("./Pages/Admin/History"));
+const UserDashboard = lazy(() => import("./Pages/User/Dashboard"));
+const UserHistory = lazy(() => import("./Pages/User/History"));
+const UserStats = lazy(() => import("./Pages/User/Stats"));
+
+/* ===========================
+    Error Boundary
+=========================== */
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
@@ -25,23 +34,24 @@ class ErrorBoundary extends React.Component {
   }
 
   componentDidCatch(error, errorInfo) {
-    // Log the error to an error reporting service
-    console.error('Error caught by ErrorBoundary:', error, errorInfo);
+    console.error("Error caught by ErrorBoundary:", error, errorInfo);
   }
 
   render() {
     if (this.state.hasError) {
       return (
-        <div style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          height: '100vh',
-          gap: '1rem'
-        }}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "100vh",
+            gap: "1rem",
+          }}
+        >
           <h1>Oops! Something went wrong.</h1>
-          <p>{"We're"} sorry for the inconvenience. Please try refreshing the page.</p>
+          <p>We're sorry for the inconvenience. Please try refreshing the page.</p>
         </div>
       );
     }
@@ -54,37 +64,79 @@ ErrorBoundary.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
+/* ===========================
+    Scroll To Top
+=========================== */
 const ScrollToTop = () => {
   const { pathname } = useLocation();
-  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
   return null;
 };
 
-// Landing Layout
+/* ===========================
+    Main Landing Layout
+=========================== */
 const MainLayout = ({ children }) => (
   <div className="flex flex-col mx-auto min-w-screen max-w-[1600px]">
     <Suspense fallback={<Loader />}>
-      <Headroom><Navbar /></Headroom>
+      <Headroom>
+        <Navbar />
+      </Headroom>
       {children}
       <Footer />
     </Suspense>
   </div>
 );
 
+MainLayout.propTypes = {
+  children: PropTypes.node,
+};
+
+/* ===========================
+    App Component
+=========================== */
 function App() {
   return (
-    <>
-      <ErrorBoundary>
-        <BrowserRouter>
-          <ScrollToTop />
+    <ErrorBoundary>
+      <BrowserRouter>
+        <ScrollToTop />
+        <Suspense fallback={<Loader />}>
           <Routes>
-            <Route path="/" element={<MainLayout> <HomePage />  </MainLayout>} />
+
+            {/* 🌐 Public Landing Routes */}
+            <Route
+              path="/"
+              element={
+                <MainLayout>
+                  <HomePage />
+                </MainLayout>
+              }
+            />
+
+            {/* 🧑‍💻 User Dashboard Routes */}
+            <Route path="/user" element={<UserLayout />}>
+              <Route index element={<Navigate to="dashboard" />} />
+              <Route path="dashboard" element={<UserDashboard />} />
+              <Route path="history" element={<UserHistory />} />
+              <Route path="stats" element={<UserStats />} />
+            </Route>
+
+            {/* 👑 Admin Dashboard Routes */}
+            <Route path="/admin" element={<AdminLayout />}>
+              <Route index element={<Navigate to="dashboard" />} />
+              <Route path="dashboard" element={<AdminDashboard />} />
+              <Route path="history" element={<AdminHistory />} />
+            </Route>
+
+            {/* 🚫 Fallback */}
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
-        </BrowserRouter>
-      </ErrorBoundary>
-    </>
-  )
+        </Suspense>
+      </BrowserRouter>
+    </ErrorBoundary>
+  );
 }
 
-export default App
+export default App;
