@@ -77,7 +77,7 @@ const HomePage = () => {
                                 <div className="flex gap-2 rounded tracking-wide text-xs sm:text-sm md:text-base text-black hover:text-white md:hover:bg-transparent border-gray-700">whitepaper
                                 </div>
                             </a>
-                            <Link to='/presale' className='btn1 btn-hover-glow px-4 sm:px-7 py-2 phone:px-5 phone:py-2 border-[#F7A00B]'>
+                            <Link to='/user' className='btn1 btn-hover-glow px-4 sm:px-7 py-2 phone:px-5 phone:py-2 border-[#F7A00B]'>
                                 <div className="flex gap-2 rounded tracking-wide text-xs sm:text-sm md:text-base text-black md:text-black hover:text-white md:hover:bg-transparent border-gray-700">Buy Now
                                 </div>
                             </Link>

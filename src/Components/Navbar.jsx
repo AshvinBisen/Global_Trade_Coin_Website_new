@@ -39,7 +39,7 @@ const Navbar = () => {
                         </div>
                     </a>
                     <div className="flex  md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-                        <Link to="/presale" className=' btn1 nav-btn px-5 py-2   phone:px-3  border-[#F7A00B] '>
+                        <Link to="/user" className=' btn1 nav-btn px-5 py-2   phone:px-3  border-[#F7A00B] '>
                             <div className="flex gap-2 Gsemibold rounded tracking-wide phone:text-sm text-black hover:text-white md:hover:bg-transparent border-gray-700">Buy Token
                             </div>
                         </Link>
