@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { MdDashboard } from "react-icons/md"; // ✅ Added Dashboard Icon
+import { MdDashboard } from "react-icons/md";
+import { RiCoinsFill } from "react-icons/ri"; // ✅ Added Invest History Icon
 import logo from "../../../assets/dashboard/logo.png";
 
 // Import your image icons
@@ -9,8 +10,9 @@ import logoutIcon from "../../../assets/dashboard/logout.png";
 
 const AdminSidebar = ({ isCollapsed }) => {
   const menuItems = [
-    { name: "Dashboard", path: "/admin/dashboard", iconType: "react-icon" },
+    { name: "Dashboard", path: "/admin/dashboard", iconType: "MdDashboard" },
     { name: "History", path: "/admin/history", icon: historyIcon },
+    { name: "Invest History", path: "/admin/invest-history", iconType: "RiCoinsFill" },
     { name: "Logout", path: "/logout", icon: logoutIcon, isLogout: true },
   ];
 
@@ -61,8 +63,7 @@ const AdminSidebar = ({ isCollapsed }) => {
                   >
                     {/* Icon Section */}
                     <div className="flex items-center justify-center">
-                      {/* If it's the Dashboard (React icon) */}
-                      {item.iconType === "react-icon" ? (
+                      {item.iconType === "MdDashboard" ? (
                         <MdDashboard
                           className={`text-2xl transition-colors duration-300 ${
                             isActive
@@ -70,8 +71,15 @@ const AdminSidebar = ({ isCollapsed }) => {
                               : "text-[#F5C242] group-hover:text-black"
                           }`}
                         />
+                      ) : item.iconType === "RiCoinsFill" ? (
+                        <RiCoinsFill
+                          className={`text-2xl transition-colors duration-300 ${
+                            isActive
+                              ? "text-black"
+                              : "text-[#F5C242] group-hover:text-black"
+                          }`}
+                        />
                       ) : (
-                        // Otherwise use image icons
                         <img
                           src={item.icon}
                           alt={item.name}

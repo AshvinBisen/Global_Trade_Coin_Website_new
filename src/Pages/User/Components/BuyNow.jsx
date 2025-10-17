@@ -31,7 +31,7 @@ export default function BuyNowGTC() {
           <h2 className="text-3xl font-bold text-center gradient-text my-2">
             Buy Now GTC
           </h2>
-          <p className="text-center text-white text-lg mb-4">
+          <p className="text-center text-white text-lg mb-2">
             Presale Round 01
           </p>
 
@@ -73,7 +73,7 @@ export default function BuyNowGTC() {
           {/* Main Buy Section */}
           <div className="mx-auto ">
             {/* USDT Button */}
-            <div className="flex justify-center mb-8">
+            <div className="flex justify-center mb-4">
               <button className="flex items-center gap-2 border border-[#FFA100] rounded-md px-6 py-2 gradient-text font-semibold hover:opacity-90 transition">
                 <img src={usdtIcon} alt="USDT" className="w-5 h-5" />
                 <span>USDT</span>
@@ -143,7 +143,7 @@ export default function BuyNowGTC() {
           </div>
 
           {/* Buttons */}
-          <div className="flex gap-3 justify-center py-5">
+          <div className="flex gap-3 justify-center py-2">
             <button className="w-32 gradient-bg text-[#000] py-2 rounded-md font-semibold hover:opacity-70 transition">
               Approve
             </button>

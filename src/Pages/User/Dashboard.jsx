@@ -86,9 +86,11 @@ const UserDashboard = () => {
               { label: "Referral Income", value: "60,741.61 GTC" },
               { label: "USD Bonus", value: "No bonus yet" },
               { label: "Total Net Profit", value: "$60,741.61" },
+              { label: "Launch Price", value: "$60" },
+              { label: "Referrals", value: "54,345" },
             ].map((item, i) => (
               <div key={i} className="gradient-border">
-                <div className="inner flex flex-col gap-2">
+                <div className="inner flex flex-col gap-3">
                   <span className="text-sm font-semibold text-[#FFF]">{item.label}</span>
                   <span className="text-lg gradient-text font-semibold">{item.value}</span>
                 </div>
@@ -124,7 +126,7 @@ const UserDashboard = () => {
               </div>
 
               {/* Set Price */}
-              <div className="bg-black flex justify-center items-center">
+              {/* <div className="bg-black flex justify-center items-center">
                 <div className="gradient-border p-5 w-full">
                   <div className="inner">
                     <p className="gradient-text text-[16px] font-semibold mb-3">Set Price</p>
@@ -144,7 +146,7 @@ const UserDashboard = () => {
                     </button>
                   </div>
                 </div>
-              </div>
+              </div> */}
 
             </div>
           </div>

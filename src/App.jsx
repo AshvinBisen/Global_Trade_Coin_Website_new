@@ -16,8 +16,10 @@ import UserLayout from "./Pages/User/UserLayout";
 const HomePage = lazy(() => import("./Pages/HomePage"));
 const AdminDashboard = lazy(() => import("./Pages/Admin/Dashboard"));
 const AdminHistory = lazy(() => import("./Pages/Admin/History"));
+const AdminInvestHistory = lazy(() => import("./Pages/Admin/InvestHistory"));
 const UserDashboard = lazy(() => import("./Pages/User/Dashboard"));
 const UserHistory = lazy(() => import("./Pages/User/History"));
+const InvestHistory = lazy(() => import("./Pages/User/InvestHistory"));
 const UserStats = lazy(() => import("./Pages/User/Stats"));
 
 /* ===========================
@@ -120,6 +122,7 @@ function App() {
               <Route index element={<Navigate to="dashboard" />} />
               <Route path="dashboard" element={<UserDashboard />} />
               <Route path="history" element={<UserHistory />} />
+              <Route path="invest-history" element={<InvestHistory />} />
               <Route path="stats" element={<UserStats />} />
             </Route>
 
@@ -128,6 +131,7 @@ function App() {
               <Route index element={<Navigate to="dashboard" />} />
               <Route path="dashboard" element={<AdminDashboard />} />
               <Route path="history" element={<AdminHistory />} />
+                <Route path="invest-history" element={<AdminInvestHistory />} />
             </Route>
 
             {/* 🚫 Fallback */}

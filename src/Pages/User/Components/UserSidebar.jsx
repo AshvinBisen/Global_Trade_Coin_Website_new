@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { MdDashboard } from "react-icons/md"; // ✅ Dashboard icon
+import { MdDashboard } from "react-icons/md";
+import { RiCoinsFill } from "react-icons/ri";
 import logo from "../../../assets/dashboard/logo.png";
 
 // ✅ Import your image icons
@@ -10,8 +11,9 @@ import logoutIcon from "../../../assets/dashboard/logout.png";
 
 const UserSidebar = ({ isCollapsed }) => {
   const menuItems = [
-    { name: "Dashboard", path: "/user/dashboard", iconType: "react-icon" },
+    { name: "Dashboard", path: "/user/dashboard", iconType: "MdDashboard" },
     { name: "History", path: "/user/history", icon: historyIcon },
+    { name: "Invest History", path: "/user/invest-history", iconType: "RiCoinsFill" },
     { name: "Stats", path: "/user/stats", icon: statsIcon },
     { name: "Logout", path: "/logout", icon: logoutIcon, isLogout: true },
   ];
@@ -63,8 +65,16 @@ const UserSidebar = ({ isCollapsed }) => {
                   >
                     {/* ✅ Icon Section */}
                     <div className="flex items-center justify-center">
-                      {item.iconType === "react-icon" ? (
+                      {item.iconType === "MdDashboard" ? (
                         <MdDashboard
+                          className={`text-2xl transition-colors duration-300 ${
+                            isActive
+                              ? "text-black"
+                              : "text-[#F5C242] group-hover:text-black"
+                          }`}
+                        />
+                      ) : item.iconType === "RiCoinsFill" ? (
+                        <RiCoinsFill
                           className={`text-2xl transition-colors duration-300 ${
                             isActive
                               ? "text-black"
@@ -116,5 +126,3 @@ const UserSidebar = ({ isCollapsed }) => {
 };
 
 export default UserSidebar;
-
-
