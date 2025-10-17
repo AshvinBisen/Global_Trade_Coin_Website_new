@@ -127,7 +127,7 @@ export default function InvestHistory() {
     <div className="bg-[#000] border border-[#FFA100] rounded-lg p-4 sm:p-6 w-full  m-4 shadow-lg">
       {/* ✅ Heading */}
       <h2 className="text-white text-lg sm:text-xl font-bold mb-5 tracking-wide">
-        Transactions
+        Invest History
       </h2>
 
       {/* ✅ Filters Row */}

@@ -69,7 +69,7 @@ function PaginationFooter({ currentPage, pageCount, onChange }) {
 }
 
 // ✅ MAIN COMPONENT
-export default function TransactionsTable() {
+export default function InvestHistory() {
   const [currentPage, setCurrentPage] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
   const [showFilter, setShowFilter] = useState(false);
@@ -124,10 +124,10 @@ export default function TransactionsTable() {
   };
 
   return (
-    <div className="bg-[#000] border border-[#FFA100] rounded-lg p-4 sm:p-6 w-full mx-auto m-4 shadow-lg">
+    <div className="bg-[#000] border border-[#FFA100] rounded-lg p-4 sm:p-6 w-full  m-4 shadow-lg">
       {/* ✅ Heading */}
       <h2 className="text-white text-lg sm:text-xl font-bold mb-5 tracking-wide">
-        Transactions
+        Invest History
       </h2>
 
       {/* ✅ Filters Row */}
