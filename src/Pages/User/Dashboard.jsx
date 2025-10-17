@@ -72,7 +72,7 @@ const UserDashboard = () => {
   // MAIN DASHBOARD (after connect)
   return (
     <div className="min-h-screen bg-black text-white p-4 font-[Inter]">
-      <div className="flex flex-wrap lg:flex-nowrap gap-6">
+      <div className="flex flex-wrap  lg:flex-nowrap gap-6 flex-col-reverse lg:flex-row">
 
         {/* Left Side */}
         <div className="w-full lg:w-1/2 flex flex-col gap-4">
