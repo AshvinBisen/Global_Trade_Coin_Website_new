@@ -10,49 +10,49 @@ import {
 } from "recharts";
 import "../../../Styles/dashboard.css";
 
-// Data for different years
+// Data for different years with multiple series
 const dataByYear = {
   2023: [
-    { name: "jan", value: 300 },
-    { name: "feb", value: 180 },
-    { name: "mar", value: 420 },
-    { name: "apr", value: 260 },
-    { name: "may", value: 310 },
-    { name: "jun", value: 400 },
-    { name: "jul", value: 350 },
-    { name: "aug", value: 290 },
-    { name: "sept", value: 450 },
-    { name: "oct", value: 310 },
-    { name: "nov", value: 220 },
-    { name: "dec", value: 390 },
+    { name: "jan", referrals: 100, bonuses: 200 },
+    { name: "feb", referrals: 80, bonuses: 100 },
+    { name: "mar", referrals: 120, bonuses: 300 },
+    { name: "apr", referrals: 60, bonuses: 200 },
+    { name: "may", referrals: 90, bonuses: 220 },
+    { name: "jun", referrals: 110, bonuses: 290 },
+    { name: "jul", referrals: 130, bonuses: 220 },
+    { name: "aug", referrals: 95, bonuses: 195 },
+    { name: "sept", referrals: 150, bonuses: 300 },
+    { name: "oct", referrals: 120, bonuses: 190 },
+    { name: "nov", referrals: 80, bonuses: 140 },
+    { name: "dec", referrals: 110, bonuses: 280 },
   ],
   2024: [
-    { name: "jan", value: 250 },
-    { name: "feb", value: 320 },
-    { name: "mar", value: 280 },
-    { name: "apr", value: 400 },
-    { name: "may", value: 200 },
-    { name: "jun", value: 340 },
-    { name: "jul", value: 300 },
-    { name: "aug", value: 380 },
-    { name: "sept", value: 360 },
-    { name: "oct", value: 410 },
-    { name: "nov", value: 150 },
-    { name: "dec", value: 270 },
+    { name: "jan", referrals: 90, bonuses: 160 },
+    { name: "feb", referrals: 120, bonuses: 200 },
+    { name: "mar", referrals: 100, bonuses: 180 },
+    { name: "apr", referrals: 140, bonuses: 260 },
+    { name: "may", referrals: 80, bonuses: 120 },
+    { name: "jun", referrals: 130, bonuses: 210 },
+    { name: "jul", referrals: 110, bonuses: 190 },
+    { name: "aug", referrals: 120, bonuses: 260 },
+    { name: "sept", referrals: 100, bonuses: 260 },
+    { name: "oct", referrals: 130, bonuses: 280 },
+    { name: "nov", referrals: 70, bonuses: 80 },
+    { name: "dec", referrals: 90, bonuses: 180 },
   ],
   2025: [
-    { name: "jan", value: 400 },
-    { name: "feb", value: 200 },
-    { name: "mar", value: 500 },
-    { name: "apr", value: 100 },
-    { name: "may", value: 200 },
-    { name: "jun", value: 350 },
-    { name: "jul", value: 230 },
-    { name: "aug", value: 340 },
-    { name: "sept", value: 400 },
-    { name: "oct", value: 370 },
-    { name: "nov", value: 100 },
-    { name: "dec", value: 300 },
+    { name: "jan", referrals: 150, bonuses: 250 },
+    { name: "feb", referrals: 80, bonuses: 120 },
+    { name: "mar", referrals: 180, bonuses: 320 },
+    { name: "apr", referrals: 50, bonuses: 50 },
+    { name: "may", referrals: 80, bonuses: 120 },
+    { name: "jun", referrals: 140, bonuses: 210 },
+    { name: "jul", referrals: 120, bonuses: 170 },
+    { name: "aug", referrals: 130, bonuses: 210 },
+    { name: "sept", referrals: 110, bonuses: 290 },
+    { name: "oct", referrals: 100, bonuses: 270 },
+    { name: "nov", referrals: 50, bonuses: 50 },
+    { name: "dec", referrals: 90, bonuses: 210 },
   ],
 };
 
@@ -113,7 +113,7 @@ export default function GtcTokenBoughtChart() {
                 </select>
               </div>
 
-              {/* Chart */}
+              {/* Stacked Area Chart */}
               <div className="h-[220px]">
                 <ResponsiveContainer width="100%" height="100%">
                   <AreaChart
@@ -138,8 +138,8 @@ export default function GtcTokenBoughtChart() {
                       tick={{ fontSize: 12, fill: "#aaa" }}
                       axisLine={false}
                       tickLine={false}
-                      ticks={[0, 100, 200, 300, 400, 500]}
-                      domain={[0, 500]}
+                      ticks={[0, 100, 200, 300, 400, 500, 600]}
+                      domain={[0, "dataMax + 50"]}
                     />
                     <Tooltip
                       cursor={{ fill: "rgba(255,255,255,0.05)" }}
@@ -152,17 +152,33 @@ export default function GtcTokenBoughtChart() {
                       itemStyle={{ color: "#FFE488" }}
                     />
                     <defs>
-                      <linearGradient id="goldGradient" x1="0" y1="0" x2="0" y2="1">
+                      <linearGradient id="referralsGradient" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#FFA100" />
+                        <stop offset="50%" stopColor="#FFE488" />
+                        <stop offset="100%" stopColor="#F89D00" />
+                      </linearGradient>
+                      <linearGradient id="bonusesGradient" x1="0" y1="0" x2="0" y2="1">
                         <stop offset="0%" stopColor="#FFA100" />
                         <stop offset="50%" stopColor="#FFE488" />
                         <stop offset="100%" stopColor="#F89D00" />
                       </linearGradient>
                     </defs>
+                    {/* Stacked Areas */}
                     <Area
                       type="monotone"
-                      dataKey="value"
-                      stroke="#FFA100"
-                      fill="url(#goldGradient)"
+                      dataKey="referrals"
+                      stackId="1"
+                      stroke="#000000"
+                      fill="url(#referralsGradient)"
+                      strokeWidth={2}
+                      dot={false}
+                    />
+                    <Area
+                      type="monotone"
+                      dataKey="bonuses"
+                      stackId="1"
+                      stroke="#000000"
+                      fill="url(#bonusesGradient)"
                       strokeWidth={2}
                       dot={false}
                     />

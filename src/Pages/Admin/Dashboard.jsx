@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import gtcicon from "../../assets/dashboard/icon-gtc.png";
-import gtclogo from "../../assets/dashboard/logo.png"; 
+import gtclogo from "../../assets/dashboard/logo.png";
 import "../../Styles/dashboard.css";
 import TransactionTable from "./Components/TransactionsTable";
 import {
@@ -20,54 +20,142 @@ import instagram from "../../assets/dashboard/social-media/instagram.png";
 import Twitter from "../../assets/dashboard/social-media/twitter.png";
 import Telegram from "../../assets/dashboard/social-media/telegram.png";
 
-const data = [
-  { name: "jan", value: 200 },
-  { name: "fab", value: 250 },
-  { name: "mar", value: 340 },
-  { name: "apr", value: 400 },
-  { name: "may", value: 200 },
-  { name: "jun", value: 120 },
-  { name: "jul", value: 310 },
-  { name: "aug", value: 320 },
-  { name: "sept", value: 240 },
-  { name: "oct", value: 180 },
-  { name: "nov", value: 390 },
-  { name: "dec", value: 500 },
-];
+// ------------------- Chart Data -------------------
+const chartData = {
+  netIncome: {
+    "2025": {
+      "1M": [{ name: "Oct", value: 180 }],
+      "6M": [
+        { name: "May", value: 200 },
+        { name: "Jun", value: 120 },
+        { name: "Jul", value: 310 },
+        { name: "Aug", value: 320 },
+        { name: "Sept", value: 240 },
+        { name: "Oct", value: 180 },
+      ],
+      "1Y": [
+        { name: "Jan", value: 200 },
+        { name: "Feb", value: 250 },
+        { name: "Mar", value: 340 },
+        { name: "Apr", value: 400 },
+        { name: "May", value: 200 },
+        { name: "Jun", value: 120 },
+        { name: "Jul", value: 310 },
+        { name: "Aug", value: 320 },
+        { name: "Sept", value: 240 },
+        { name: "Oct", value: 180 },
+        { name: "Nov", value: 390 },
+        { name: "Dec", value: 500 },
+      ],
+    },
+    "2024": {
+      "1M": [{ name: "Oct", value: 150 }],
+      "6M": [
+        { name: "May", value: 180 },
+        { name: "Jun", value: 200 },
+        { name: "Jul", value: 250 },
+        { name: "Aug", value: 300 },
+        { name: "Sept", value: 280 },
+        { name: "Oct", value: 150 },
+      ],
+      "1Y": [
+        { name: "Jan", value: 100 },
+        { name: "Feb", value: 150 },
+        { name: "Mar", value: 200 },
+        { name: "Apr", value: 250 },
+        { name: "May", value: 180 },
+        { name: "Jun", value: 200 },
+        { name: "Jul", value: 250 },
+        { name: "Aug", value: 300 },
+        { name: "Sept", value: 280 },
+        { name: "Oct", value: 150 },
+        { name: "Nov", value: 220 },
+        { name: "Dec", value: 300 },
+      ],
+    },
+  },
+  holderInvestment: {
+    "2025": {
+      "1M": [{ name: "Oct", value: 460 }],
+      "6M": [
+        { name: "May", value: 300 },
+        { name: "Jun", value: 180 },
+        { name: "Jul", value: 420 },
+        { name: "Aug", value: 370 },
+        { name: "Sep", value: 410 },
+        { name: "Oct", value: 460 },
+      ],
+      "1Y": [
+        { name: "Jan", value: 200 },
+        { name: "Feb", value: 320 },
+        { name: "Mar", value: 400 },
+        { name: "Apr", value: 250 },
+        { name: "May", value: 300 },
+        { name: "Jun", value: 180 },
+        { name: "Jul", value: 420 },
+        { name: "Aug", value: 370 },
+        { name: "Sep", value: 410 },
+        { name: "Oct", value: 460 },
+        { name: "Nov", value: 500 },
+        { name: "Dec", value: 550 },
+      ],
+    },
+    "2024": {
+      "1M": [{ name: "Oct", value: 400 }],
+      "6M": [
+        { name: "May", value: 250 },
+        { name: "Jun", value: 200 },
+        { name: "Jul", value: 350 },
+        { name: "Aug", value: 300 },
+        { name: "Sep", value: 360 },
+        { name: "Oct", value: 400 },
+      ],
+      "1Y": [
+        { name: "Jan", value: 150 },
+        { name: "Feb", value: 220 },
+        { name: "Mar", value: 300 },
+        { name: "Apr", value: 200 },
+        { name: "May", value: 250 },
+        { name: "Jun", value: 200 },
+        { name: "Jul", value: 350 },
+        { name: "Aug", value: 300 },
+        { name: "Sep", value: 360 },
+        { name: "Oct", value: 400 },
+        { name: "Nov", value: 450 },
+        { name: "Dec", value: 500 },
+      ],
+    },
+  },
+};
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const [walletConnected, setWalletConnected] = useState(false);
 
-  const handleConnectWallet = () => {
-    setWalletConnected(true);
-  };
+  const [netIncomeView, setNetIncomeView] = useState("1Y");
+  const [netIncomeYear, setNetIncomeYear] = useState("2025");
 
-  // Show Popup First
+  const [holderInvestmentView, setHolderInvestmentView] = useState("1Y");
+  const [holderInvestmentYear, setHolderInvestmentYear] = useState("2025");
+
+  const handleConnectWallet = () => setWalletConnected(true);
+
   if (!walletConnected) {
     return (
       <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-80 z-50 font-[inter]">
         <div className="bg-black border border-[#FFA100] rounded-xl p-2 text-center w-[90%] max-w-md relative">
           <div className="flex flex-col items-center gap-3">
-            <img src={gtclogo} alt="GTC Logo" className="w-40 h-14"/>
-            <p className="text-white text-lg my-6">
-              Enter The GTC Presale Dashboard
-            </p>
-
-            {/* Connect Wallet Button */}
+            <img src={gtclogo} alt="GTC Logo" className="w-40 h-14" />
+            <p className="text-white text-lg my-6">Enter The GTC Presale Dashboard</p>
             <button
               onClick={handleConnectWallet}
-              className="w-full max-w-[235px] bg-[linear-gradient(180deg,#FFA100_0%,#FFE488_44%,#F89D00_100%)] 
-              text-black font-semibold py-2 rounded-md mb-4 hover:opacity-90 transition"
+              className="w-full max-w-[235px] bg-[linear-gradient(180deg,#FFA100_0%,#FFE488_44%,#F89D00_100%)] text-black font-semibold py-2 rounded-md mb-4 hover:opacity-90 transition"
             >
               Connect Wallet
             </button>
-
-            {/* Back Home Button */}
             <button
               onClick={() => navigate("/")}
-              className="w-full max-w-[235px] bg-[linear-gradient(180deg,#FFA100_0%,#FFE488_44%,#F89D00_100%)] 
-              text-black font-semibold py-2 rounded-md mb-4 hover:opacity-90 transition"
+              className="w-full max-w-[235px] bg-[linear-gradient(180deg,#FFA100_0%,#FFE488_44%,#F89D00_100%)] text-black font-semibold py-2 rounded-md mb-4 hover:opacity-90 transition"
             >
               ← Back Home
             </button>
@@ -77,7 +165,6 @@ const Dashboard = () => {
     );
   }
 
-  // MAIN DASHBOARD AFTER CONNECT
   return (
     <div className="min-h-screen bg-black text-white p-1 md:p-4 font-[Inter]">
       <div className="flex flex-wrap lg:flex-nowrap gap-6">
@@ -95,17 +182,12 @@ const Dashboard = () => {
             ].map((item, i) => (
               <div key={i} className="gradient-border">
                 <div className="inner flex flex-col gap-2">
-                  <span className="text-sm font-semibold text-[#FFF]">
-                    {item.label}
-                  </span>
-                  <span className="text-lg gradient-text font-semibold">
-                    {item.value}
-                  </span>
+                  <span className="text-sm font-semibold text-[#FFF]">{item.label}</span>
+                  <span className="text-lg gradient-text font-semibold">{item.value}</span>
                 </div>
               </div>
             ))}
           </div>
-
           {/* Tier Status */}
           <div className="gradient-border">
             <div className="inner">
@@ -170,233 +252,129 @@ const Dashboard = () => {
 
         {/* Right Side Charts */}
         <div className="w-full lg:w-1/2 grid grid-rows-2 gap-6">
-          {/* Net Income */}
+          {/* Net Income Chart */}
           <div className="gradient-border p-2 sm:p-4 w-full">
             <div className="inner">
               <div className="flex justify-between items-center mb-3">
-                <h3 className="gradient-text font-semibold text-lg">
-                  Net Income
-                </h3>
+                <h3 className="gradient-text font-semibold text-lg">Net Income</h3>
               </div>
-
-              <div className="gradient-border p-2 sm:p-4 gap-6">
-                <div className="inner">
-                  <div className="flex items-center gap-2 mb-4">
-                    {["1M", "6M", "1Y"].map((btn) => (
-                      <button
-                        key={btn}
-                        className="bg-[linear-gradient(180deg,#FFA100_0%,#FFE488_44%,#F89D00_100%)] 
-                        text-black text-xs font-semibold px-3 py-[3px] rounded-md hover:opacity-90 transition"
-                      >
-                        {btn}
-                      </button>
-                    ))}
-                    <select
-                      className="bg-[linear-gradient(180deg,#FFA100_0%,#FFE488_44%,#F89D00_100%)] 
-                      text-black text-xs font-semibold px-3 py-[3px] rounded-md outline-none hover:opacity-90 transition"
-                    >
-                      <option>2025</option>
-                    </select>
-                  </div>
-
-                  <div className="h-[220px]">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <BarChart
-                        data={data}
-                        margin={{ top: 10, right: 10, left: -10, bottom: 0 }}
-                      >
-                        <CartesianGrid
-                          strokeDasharray="4 4"
-                          stroke="#555"
-                          horizontal
-                          vertical={false}
-                        />
-                        <XAxis
-                          dataKey="name"
-                          stroke="#aaa"
-                          tick={{ fontSize: 12, fill: "#aaa" }}
-                          axisLine={false}
-                          tickLine={false}
-                        />
-                        <YAxis
-                          stroke="#aaa"
-                          tick={{ fontSize: 12, fill: "#aaa" }}
-                          axisLine={false}
-                          tickLine={false}
-                          ticks={[100, 200, 300, 400, 500]}
-                          domain={[0, 500]}
-                        />
-                        <Tooltip
-                          cursor={{ fill: "rgba(255,255,255,0.05)" }}
-                          contentStyle={{
-                            backgroundColor: "#111",
-                            border: "1px solid #FFA100",
-                            borderRadius: "6px",
-                          }}
-                          labelStyle={{ color: "#FFA100" }}
-                          itemStyle={{ color: "#FFE488" }}
-                        />
-                        <defs>
-                          <linearGradient id="goldGradient" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%" stopColor="#FFA100" />
-                            <stop offset="50%" stopColor="#FFE488" />
-                            <stop offset="100%" stopColor="#F89D00" />
-                          </linearGradient>
-                        </defs>
-                        <Bar
-                          dataKey="value"
-                          fill="url(#goldGradient)"
-                          radius={[6, 6, 0, 0]}
-                          barSize={20}
-                        />
-                      </BarChart>
-                    </ResponsiveContainer>
-                  </div>
-                </div>
+              <div className="flex items-center gap-2 mb-4">
+                {["1M", "6M", "1Y"].map((btn) => (
+                  <button
+                    key={btn}
+                    className="bg-[linear-gradient(180deg,#FFA100_0%,#FFE488_44%,#F89D00_100%)] text-black text-xs font-semibold px-3 py-[3px] rounded-md hover:opacity-90 transition"
+                    onClick={() => setNetIncomeView(btn)}
+                  >
+                    {btn}
+                  </button>
+                ))}
+                <select
+                  value={netIncomeYear}
+                  onChange={(e) => setNetIncomeYear(e.target.value)}
+                  className="bg-[linear-gradient(180deg,#FFA100_0%,#FFE488_44%,#F89D00_100%)] text-black text-xs font-semibold px-3 py-[3px] rounded-md outline-none hover:opacity-90 transition"
+                >
+                  <option>2025</option>
+                  <option>2024</option>
+                </select>
+              </div>
+              <div className="h-[170px] sm:h-[220px]">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={chartData.netIncome[netIncomeYear][netIncomeView]}>
+                    <CartesianGrid strokeDasharray="4 4" stroke="#555" horizontal vertical={false} />
+                    <XAxis dataKey="name" stroke="#aaa" tick={{ fontSize: 12, fill: "#aaa" }} axisLine={false} tickLine={false} />
+                    <YAxis stroke="#aaa" tick={{ fontSize: 12, fill: "#aaa" }} axisLine={false} tickLine={false} />
+                    <Tooltip
+                      cursor={{ fill: "rgba(255,255,255,0.05)" }}
+                      contentStyle={{ backgroundColor: "#111", border: "1px solid #FFA100", borderRadius: "6px" }}
+                      labelStyle={{ color: "#FFA100" }}
+                      itemStyle={{ color: "#FFE488" }}
+                    />
+                    <defs>
+                      <linearGradient id="goldGradient" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#FFA100" />
+                        <stop offset="50%" stopColor="#FFE488" />
+                        <stop offset="100%" stopColor="#F89D00" />
+                      </linearGradient>
+                    </defs>
+                    <Bar dataKey="value" fill="url(#goldGradient)" radius={[6, 6, 0, 0]} barSize={20} />
+                  </BarChart>
+                </ResponsiveContainer>
               </div>
             </div>
           </div>
 
-          {/* Holder Investments */}
-          <div className="gradient-border p-4 w-full">
+          {/* Holder Investment Chart */}
+          <div className="gradient-border p-2 sm:p-4 w-full">
             <div className="inner">
               <div className="flex justify-between items-center mb-3">
-                <h3 className="gradient-text font-semibold text-lg">
-                  Holder Investments
-                </h3>
+                <h3 className="gradient-text font-semibold text-lg">Holder Investments</h3>
               </div>
-
-              <div className="gradient-border p-4">
-                <div className="inner">
-                  <div className="flex items-center gap-2 mb-4">
-                    {["1M", "6M", "1Y"].map((btn) => (
-                      <button
-                        key={btn}
-                        className="bg-[linear-gradient(180deg,#FFA100_0%,#FFE488_44%,#F89D00_100%)] 
-                      text-black text-xs font-semibold px-3 py-[3px] rounded-md hover:opacity-90 transition"
-                      >
-                        {btn}
-                      </button>
-                    ))}
-                    <select
-                      className="bg-[linear-gradient(180deg,#FFA100_0%,#FFE488_44%,#F89D00_100%)] 
-                    text-black text-xs font-semibold px-3 py-[3px] rounded-md outline-none hover:opacity-90 transition"
-                    >
-                      <option>2025</option>
-                    </select>
-                  </div>
-
-                  <div className="h-[220px]">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <BarChart
-                        data={[
-                          { name: "Jan", value: 200 },
-                          { name: "Feb", value: 320 },
-                          { name: "Mar", value: 400 },
-                          { name: "Apr", value: 250 },
-                          { name: "May", value: 300 },
-                          { name: "Jun", value: 180 },
-                          { name: "Jul", value: 420 },
-                          { name: "Aug", value: 370 },
-                          { name: "Sep", value: 410 },
-                          { name: "Oct", value: 460 },
-                          { name: "Nov", value: 500 },
-                          { name: "Dec", value: 550 },
-                        ]}
-                        margin={{ top: 10, right: 10, left: -10, bottom: 0 }}
-                      >
-                        <CartesianGrid
-                          strokeDasharray="4 4"
-                          stroke="#555"
-                          horizontal
-                          vertical={false}
-                        />
-                        <XAxis
-                          dataKey="name"
-                          stroke="#aaa"
-                          tick={{ fontSize: 12, fill: "#aaa" }}
-                          axisLine={false}
-                          tickLine={false}
-                        />
-                        <YAxis
-                          stroke="#aaa"
-                          tick={{ fontSize: 12, fill: "#aaa" }}
-                          axisLine={false}
-                          tickLine={false}
-                          ticks={[100, 200, 300, 400, 500, 600]}
-                          domain={[0, 600]}
-                        />
-                        <Tooltip
-                          cursor={{ fill: "rgba(255,255,255,0.05)" }}
-                          contentStyle={{
-                            backgroundColor: "#111",
-                            border: "1px solid #FFA100",
-                            borderRadius: "6px",
-                          }}
-                          labelStyle={{ color: "#FFA100" }}
-                          itemStyle={{ color: "#FFE488" }}
-                        />
-                        <defs>
-                          <linearGradient id="holderGradient" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%" stopColor="#FFA100" />
-                            <stop offset="50%" stopColor="#FFE488" />
-                            <stop offset="100%" stopColor="#F89D00" />
-                          </linearGradient>
-                        </defs>
-                        <Bar
-                          dataKey="value"
-                          fill="url(#holderGradient)"
-                          radius={[6, 6, 0, 0]}
-                          barSize={20}
-                        />
-                      </BarChart>
-                    </ResponsiveContainer>
-                  </div>
-                </div>
+              <div className="flex items-center gap-2 mb-4">
+                {["1M", "6M", "1Y"].map((btn) => (
+                  <button
+                    key={btn}
+                    className="bg-[linear-gradient(180deg,#FFA100_0%,#FFE488_44%,#F89D00_100%)] text-black text-xs font-semibold px-3 py-[3px] rounded-md hover:opacity-90 transition"
+                    onClick={() => setHolderInvestmentView(btn)}
+                  >
+                    {btn}
+                  </button>
+                ))}
+                <select
+                  value={holderInvestmentYear}
+                  onChange={(e) => setHolderInvestmentYear(e.target.value)}
+                  className="bg-[linear-gradient(180deg,#FFA100_0%,#FFE488_44%,#F89D00_100%)] text-black text-xs font-semibold px-3 py-[3px] rounded-md outline-none hover:opacity-90 transition"
+                >
+                  <option>2025</option>
+                  <option>2024</option>
+                </select>
+              </div>
+              <div className="h-[170px] sm:h-[220px]">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={chartData.holderInvestment[holderInvestmentYear][holderInvestmentView]}>
+                    <CartesianGrid strokeDasharray="4 4" stroke="#555" horizontal vertical={false} />
+                    <XAxis dataKey="name" stroke="#aaa" tick={{ fontSize: 12, fill: "#aaa" }} axisLine={false} tickLine={false} />
+                    <YAxis stroke="#aaa" tick={{ fontSize: 12, fill: "#aaa" }} axisLine={false} tickLine={false} />
+                    <Tooltip
+                      cursor={{ fill: "rgba(255,255,255,0.05)" }}
+                      contentStyle={{ backgroundColor: "#111", border: "1px solid #FFA100", borderRadius: "6px" }}
+                      labelStyle={{ color: "#FFA100" }}
+                      itemStyle={{ color: "#FFE488" }}
+                    />
+                    <defs>
+                      <linearGradient id="holderGradient" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#FFA100" />
+                        <stop offset="50%" stopColor="#FFE488" />
+                        <stop offset="100%" stopColor="#F89D00" />
+                      </linearGradient>
+                    </defs>
+                    <Bar dataKey="value" fill="url(#holderGradient)" radius={[6, 6, 0, 0]} barSize={20} />
+                  </BarChart>
+                </ResponsiveContainer>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Social Media Section */}
+      {/* Social Media Section (keep your existing code here) */}
       <div className="w-full py-8 mt-2">
         <div className="mx-auto">
           <div className="gradient-border">
             <div className="inner flex flex-col md:flex-row items-center gap-6 md:gap-12">
-              {/* Left Image */}
               <div className="w-full md:w-2/5 flex justify-center py-4">
-                <img
-                  src={leftImageSrc}
-                  alt="illustration"
-                  className="max-w-[252px] w-full h-auto object-contain rounded-md"
-                />
+                <img src={leftImageSrc} alt="illustration" className="max-w-[252px] w-full h-auto object-contain rounded-md" />
               </div>
-
-              {/* Right content */}
               <div className="w-full md:w-3/5 text-center text-white">
-                <h2 className="text-3xl md:text-4xl font-semibold gradient-text">
-                  Social Media Links
-                </h2>
-
+                <h2 className="text-3xl md:text-4xl font-semibold gradient-text">Social Media Links</h2>
                 <p className="mt-4 max-w-lg mx-auto text-sm md:text-base text-gray-300">
-                  Get your friends to join and earn rewards! Receive{" "}
-                  <strong>10% commission</strong> when your friends buy.
+                  Get your friends to join and earn rewards! Receive <strong>10% commission</strong> when your friends buy.
                 </p>
-
                 <div className="mt-8 flex items-center justify-center gap-6">
-                  <a href="#" className="w-14 h-14 hover:scale-105">
-                    <img src={Facebook} alt="Facebook" className="w-14 h-14" />
-                  </a>
-                  <a href="#" className="w-14 h-14 hover:scale-105">
-                    <img src={instagram} alt="Instagram" className="w-14 h-14" />
-                  </a>
-                  <a href="#" className="w-14 h-14 hover:scale-105">
-                    <img src={Twitter} alt="Twitter" className="w-14 h-14" />
-                  </a>
-                  <a href="#" className="w-14 h-14 hover:scale-105">
-                    <img src={Telegram} alt="Telegram" className="w-14 h-14" />
-                  </a>
+                  {[Facebook, instagram, Twitter, Telegram].map((icon, i) => (
+                    <a key={i} href="#" className="w-14 h-14 hover:scale-105">
+                      <img src={icon} alt="Social" className="w-14 h-14" />
+                    </a>
+                  ))}
                 </div>
               </div>
             </div>
@@ -410,4 +388,5 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
 

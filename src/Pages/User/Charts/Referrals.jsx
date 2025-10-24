@@ -155,7 +155,7 @@ export default function NetIncomeChart() {
                     dataKey="value"
                     fill="url(#goldGradient)"
                     radius={[6, 6, 0, 0]}
-                    barSize={30}
+                    barSize={14}
                     animationDuration={800}
                   />
                 </BarChart>
