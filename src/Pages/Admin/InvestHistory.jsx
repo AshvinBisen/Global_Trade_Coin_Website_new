@@ -36,14 +36,19 @@ function EthButton() {
   );
 }
 
-// Status Badge
+// Status Badge with colored background
 function StatusBadge({ status }) {
-  let color = "";
-  if (status === "Claimed") color = "text-green-400";
-  else if (status === "Locked") color = "text-yellow-400";
-  else color = "text-red-500";
+  let bgColor = "";
 
-  return <span className={`font-semibold ${color}`}>{status}</span>;
+  if (status === "Claimed") bgColor = "bg-[#00FF00]";
+  else if (status === "Locked") bgColor = "bg-[#FFFF00]";
+  else bgColor = "bg-[#FF0000]";
+
+  return (
+    <span className={`${bgColor} text-black font-semibold px-2 py-1 rounded-full inline-block text-center min-w-[80px]`}>
+      {status}
+    </span>
+  );
 }
 
 // Pagination
