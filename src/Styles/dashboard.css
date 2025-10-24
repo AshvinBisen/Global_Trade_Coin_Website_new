@@ -90,3 +90,9 @@ body {
 .custom-scrollbar::-webkit-scrollbar-track {
   background: rgba(255, 193, 7, 0.1);
 }
+
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}

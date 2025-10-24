@@ -71,7 +71,7 @@ export default function GtcTokenBoughtChart() {
           <div className="gradient-border p-4 rounded-xl">
             <div className="inner">
               {/* Filters */}
-              <div className="flex items-center gap-2 mb-4">
+              <div className="flex items-center gap-2 mb-4 flex-wrap">
                 {["1M", "6M", "1Y"].map((btn) => (
                   <button
                     key={btn}

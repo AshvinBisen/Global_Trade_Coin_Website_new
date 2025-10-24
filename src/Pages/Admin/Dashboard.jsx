@@ -47,7 +47,7 @@ const Dashboard = () => {
   if (!walletConnected) {
     return (
       <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-80 z-50 font-[inter]">
-        <div className="bg-black border border-[#FFA100] rounded-xl p-8 text-center w-[90%] max-w-md relative">
+        <div className="bg-black border border-[#FFA100] rounded-xl p-2 text-center w-[90%] max-w-md relative">
           <div className="flex flex-col items-center gap-3">
             <img src={gtclogo} alt="GTC Logo" className="w-40 h-14"/>
             <p className="text-white text-lg my-6">
@@ -171,7 +171,7 @@ const Dashboard = () => {
         {/* Right Side Charts */}
         <div className="w-full lg:w-1/2 grid grid-rows-2 gap-6">
           {/* Net Income */}
-          <div className="gradient-border p-4 w-full">
+          <div className="gradient-border p-2 sm:p-4 w-full">
             <div className="inner">
               <div className="flex justify-between items-center mb-3">
                 <h3 className="gradient-text font-semibold text-lg">
@@ -179,7 +179,7 @@ const Dashboard = () => {
                 </h3>
               </div>
 
-              <div className="gradient-border p-4 gap-6">
+              <div className="gradient-border p-2 sm:p-4 gap-6">
                 <div className="inner">
                   <div className="flex items-center gap-2 mb-4">
                     {["1M", "6M", "1Y"].map((btn) => (

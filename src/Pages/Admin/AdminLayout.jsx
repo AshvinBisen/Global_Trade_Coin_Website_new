@@ -36,7 +36,7 @@ const AdminLayout = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-black text-white font-[inter]">
+    <div className="flex min-h-screen bg-black text-white font-[inter] w-full">
       {/* Sidebar */}
       {isSidebarVisible && (
         <div
@@ -50,7 +50,7 @@ const AdminLayout = () => {
 
       {/* Main Content */}
       <div
-        className={`flex-1 flex flex-col transition-all duration-500 ${
+        className={`flex-1 flex flex-col transition-all duration-500 w-full max-w-full ${
           !isMobile
             ? isCollapsed
               ? "lg:ml-[90px]"
@@ -65,9 +65,15 @@ const AdminLayout = () => {
         />
 
         {/* Page Outlet */}
-        <main className="flex-1 p-2 first-letter:md:p-4 overflow-y-auto bg-black">
+        {/* <main className="flex-1 p-2 first-letter:md:p-4 overflow-y-auto bg-black">
           <Outlet />
-        </main>
+        </main> */}
+        <main className="flex-1 w-full p-2 md:p-4 mt-[60px] md:mt-0 overflow-y-auto max-w-full">
+                  {/* Responsive scroll wrapper for child pages */}
+                  <div className="w-full max-w-full overflow-x-auto">
+                    <Outlet />
+                  </div>
+                </main>
       </div>
     </div>
   );
